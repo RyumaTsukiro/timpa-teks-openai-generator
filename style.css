@@ -1,0 +1,135 @@
+:root {
+    --bg-dark: #1a1a2e;
+    --bg-card: rgba(22, 22, 40, 0.6);
+    --border-color: rgba(147, 148, 170, 0.2);
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent-color: #3f72af;
+    --accent-hover: #4e8dce;
+    --ai-accent: #e94560;
+    --ai-hover: #f36f86;
+    --font-ui: 'Poppins', sans-serif;
+}
+
+/* --- Efek Background Aurora --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(circle at 15% 25%, #162238 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, #4a1c40 0%, transparent 40%);
+    background-color: var(--bg-dark);
+    animation: aurora 20s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes aurora {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+body { margin: 0; font-family: var(--font-ui); color: var(--text-primary); font-size: 16px; line-height: 1.6; }
+.container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+header { text-align: center; margin-bottom: 2rem; }
+header h1 { font-size: 2.8rem; font-weight: 600; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+header p { color: var(--text-secondary); font-size: 1.1rem; }
+.app-layout { display: flex; gap: 2rem; backdrop-filter: blur(10px); }
+
+/* --- Panel Kontrol dengan Efek Kaca --- */
+.controls-panel { width: 380px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1.5rem; }
+.control-group { 
+    background-color: var(--bg-card);
+    padding: 1.5rem; 
+    border-radius: 16px; 
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.control-group:hover { transform: translateY(-5px); box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3); }
+
+.step-label { display: block; font-weight: 600; font-size: 1.2rem; margin-bottom: 1rem; }
+.ai-group .step-label { color: var(--ai-accent); }
+.instruction { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem; }
+
+/* --- Styling Form yang Menarik --- */
+.custom-file-upload {
+    border: 1px solid var(--border-color);
+    background-color: rgba(255,255,255,0.05);
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+.custom-file-upload:hover { background-color: rgba(255,255,255,0.1); }
+input[type="file"] { display: none; }
+#fileName { font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px; display: block; text-align: center; }
+
+textarea, select { 
+    width: 100%; 
+    box-sizing: border-box; 
+    background-color: rgba(0,0,0,0.2); 
+    border: 1px solid var(--border-color); 
+    color: var(--text-primary); 
+    border-radius: 8px; 
+    padding: 0.75rem;
+    font-family: var(--font-ui);
+}
+textarea { min-height: 80px; }
+
+.text-controls, .font-select-wrapper { margin-top: 1rem; }
+.text-controls { display: flex; justify-content: space-between; align-items: center; }
+.text-controls div, .font-select-wrapper { display: flex; flex-direction: column; gap: 0.5rem; }
+
+button { 
+    width: 100%; padding: 0.8rem 1rem; 
+    border: none; border-radius: 8px; 
+    background-color: #333; color: var(--text-primary); 
+    cursor: pointer; font-size: 1rem; font-weight: 600;
+    transition: all 0.2s; margin-top: 0.5rem; 
+}
+button:hover { transform: scale(1.02); }
+button.primary-button { background-color: var(--accent-color); }
+button.primary-button:hover { background-color: var(--accent-hover); }
+button.ai-button { background: linear-gradient(45deg, var(--ai-accent), #f09819); }
+button.ai-button:hover { filter: brightness(1.2); }
+
+/* --- Kotak Saran AI --- */
+.ai-suggestion {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(233, 69, 96, 0.1);
+    border-left: 4px solid var(--ai-accent);
+    border-radius: 4px;
+}
+.ai-suggestion p { margin: 0; font-style: italic; color: var(--text-primary); }
+
+/* --- Area Kanvas --- */
+.canvas-container { 
+    flex-grow: 1; display: flex; justify-content: center; align-items: center; 
+    background-color: var(--bg-card); border: 1px dashed var(--border-color); 
+    border-radius: 16px; padding: 1rem; min-height: 400px; 
+    position: relative; backdrop-filter: blur(20px);
+}
+.canvas-placeholder p { color: var(--text-secondary); text-align: center; }
+#editorCanvas { max-width: 100%; max-height: 80vh; border-radius: 8px; cursor: crosshair; }
+
+/* --- Spinner Baru --- */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%,#e94560);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: spin 1s infinite linear;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(1turn); } }
+
+@media (max-width: 900px) { .app-layout { flex-direction: column; } .controls-panel { width: 100%; } }

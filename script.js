@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // GANTI DENGAN URL VERCEL BARU ANDA
-    const BACKEND_URL = 'https://timpa-teks-openai-generator.vercel.app/api/generate-ai'; // Contoh
-
+    
+    const BACKEND_URL = 'https://timpa-teks-openai-api.vercel.app/api/generate-ai';
+    
     // Referensi Elemen
     const imageLoader = document.getElementById('imageLoader');
     const fileNameSpan = document.getElementById('fileName');
